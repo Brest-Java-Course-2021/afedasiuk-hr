@@ -11,6 +11,7 @@ import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
 import java.util.List;
+import java.util.Optional;
 
 @RunWith(SpringJUnit4ClassRunner.class)
 @ContextConfiguration(locations = {"classpath*:test-db.xml", "classpath*:test-dao.xml"})
@@ -40,7 +41,7 @@ public class DepartmentDaoJdbcTest {
     }
 
     @Test(expected = EmptyResultDataAccessException.class)
-    public void findByIdExeptionalTest() {
+    public void findByIdExceptionalTest() {
         departmentDao.findById(999).get();
     }
 
@@ -50,11 +51,55 @@ public class DepartmentDaoJdbcTest {
         Assert.assertNotNull(departments);
         Assert.assertTrue(departments.size() > 0);
 
-        Department department = new Department("HR");
-        departmentDao.create(department);
+        departmentDao.create(new Department("HR"));
 
         List<Department> realDepartments = departmentDao.findAll();
         Assert.assertEquals(departments.size() + 1, realDepartments.size());
     }
+
+    @Test(expected = IllegalArgumentException.class)
+    public void createDepartmentWithSameNameTest() {
+        List<Department> departments = departmentDao.findAll();
+        Assert.assertNotNull(departments);
+        Assert.assertTrue(departments.size() > 0);
+
+        departmentDao.create(new Department("HR"));
+        departmentDao.create(new Department("HR"));
+    }
+
+    @Test(expected = IllegalArgumentException.class)
+    public void createDepartmentWithSameNameDiffCaseTest() {
+        List<Department> departments = departmentDao.findAll();
+        Assert.assertNotNull(departments);
+        Assert.assertTrue(departments.size() > 0);
+
+        departmentDao.create(new Department("HR"));
+        departmentDao.create(new Department("Hr"));
+    }
+
+    @Test
+    public void updateDepartmentTest() {
+        List<Department> departments = departmentDao.findAll();
+        Assert.assertNotNull(departments);
+        Assert.assertTrue(departments.size() > 0);
+
+        Department department = departments.get(0);
+        department.setDepartmentName("TEST_DEPARTMENT");
+        departmentDao.update(department);
+
+        Optional<Department> realDepartment = departmentDao.findById(department.getDepartmentId());
+        Assert.assertEquals("TEST_DEPARTMENT", realDepartment.get().getDepartmentName());
+    }
+
+//    @Test
+//    public void updateDepartmentNotUniqueNameTest() {
+//        List<Department> departments = departmentDao.findAll();
+//        Assert.assertNotNull(departments);
+//        Assert.assertTrue(departments.size() > 0);
+//
+//        Department department = departments.get(0);
+//        department.setDepartmentName(departments.get(1).getDepartmentName());
+//        departmentDao.update(department);
+//    }
 
 }
