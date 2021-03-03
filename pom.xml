@@ -12,8 +12,10 @@
     <modules>
         <module>model</module>
         <module>dao</module>
+        <module>dao-api</module>
         <module>test-db</module>
         <module>web-app</module>
+        <module>service-api</module>
     </modules>
 
     <properties>
@@ -28,6 +30,12 @@
             <dependency>
                 <groupId>com.epam.brest</groupId>
                 <artifactId>model</artifactId>
+                <version>${project.version}</version>
+            </dependency>
+
+            <dependency>
+                <groupId>com.epam.brest</groupId>
+                <artifactId>dao-api</artifactId>
                 <version>${project.version}</version>
             </dependency>
 

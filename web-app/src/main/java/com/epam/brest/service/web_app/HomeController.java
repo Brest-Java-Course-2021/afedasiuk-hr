@@ -1,4 +1,4 @@
-package com.epam.brest.web_app;
+package com.epam.brest.service.web_app;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -11,6 +11,6 @@ public class HomeController {
 
     @GetMapping(value = "/")
     public String defaultPageRedirect() {
-        return "redirect:hello";
+        return "redirect:departments";
     }
 }
