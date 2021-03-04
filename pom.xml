@@ -11,8 +11,11 @@
 
     <modules>
         <module>model</module>
-        <module>dao</module>
         <module>test-db</module>
+        <module>dao-api</module>
+        <module>dao</module>
+        <module>service-api</module>
+        <module>service</module>
         <module>web-app</module>
     </modules>
 
@@ -33,7 +36,25 @@
 
             <dependency>
                 <groupId>com.epam.brest</groupId>
+                <artifactId>dao-api</artifactId>
+                <version>${project.version}</version>
+            </dependency>
+
+            <dependency>
+                <groupId>com.epam.brest</groupId>
                 <artifactId>dao</artifactId>
+                <version>${project.version}</version>
+            </dependency>
+
+            <dependency>
+                <groupId>com.epam.brest</groupId>
+                <artifactId>service-api</artifactId>
+                <version>${project.version}</version>
+            </dependency>
+
+            <dependency>
+                <groupId>com.epam.brest</groupId>
+                <artifactId>service</artifactId>
                 <version>${project.version}</version>
             </dependency>
 
@@ -58,6 +79,12 @@
             <dependency>
                 <groupId>org.springframework</groupId>
                 <artifactId>spring-jdbc</artifactId>
+                <version>${spring.version}</version>
+            </dependency>
+
+            <dependency>
+                <groupId>org.springframework</groupId>
+                <artifactId>spring-tx</artifactId>
                 <version>${spring.version}</version>
             </dependency>
 

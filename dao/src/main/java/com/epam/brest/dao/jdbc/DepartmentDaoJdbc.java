@@ -1,7 +1,7 @@
 package com.epam.brest.dao.jdbc;
 
-import com.epam.brest.dao.DepartmentDao;
 import com.epam.brest.model.Department;
+import com.epam.brest.dao.*;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.jdbc.core.BeanPropertyRowMapper;
