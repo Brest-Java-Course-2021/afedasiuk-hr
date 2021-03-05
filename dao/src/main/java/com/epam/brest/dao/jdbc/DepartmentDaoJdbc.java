@@ -4,6 +4,7 @@ import com.epam.brest.model.Department;
 import com.epam.brest.dao.*;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.jdbc.core.BeanPropertyRowMapper;
 import org.springframework.jdbc.core.RowMapper;
 import org.springframework.jdbc.core.namedparam.MapSqlParameterSource;
@@ -20,24 +21,24 @@ public class DepartmentDaoJdbc implements DepartmentDao {
 
     private static final Logger LOGGER = LoggerFactory.getLogger(DepartmentDaoJdbc.class);
 
-    private static final String SQL_GET_ALL_DEPARTMENTS =
-            "SELECT D.DEPARTMENT_ID, D.DEPARTMENT_NAME FROM DEPARTMENT AS D ORDER BY D.DEPARTMENT_NAME";
+    @Value("${department.select}")
+    private String selectSql;
 
-    private static final String SQL_GET_DEPARTMENT_BY_ID =
-            "SELECT D.DEPARTMENT_ID, D.DEPARTMENT_NAME FROM DEPARTMENT AS D WHERE D.DEPARTMENT_ID = :DEPARTMENT_ID";
+    @Value("${department.create}")
+    private String createSql;
 
-    private static final String SQL_CREATE_DEPARTMENT =
-            "INSERT INTO DEPARTMENT (DEPARTMENT_NAME) VALUES ( :DEPARTMENT_NAME );";
+    @Value("${department.update}")
+    private String updateSql;
 
-    private static final String SQL_CHECK_DEPARTMENT_NAME =
-            "SELECT COUNT(DEPARTMENT_ID) FROM DEPARTMENT WHERE lower(DEPARTMENT_NAME) = lower(:DEPARTMENT_NAME)";
+    @Value("${department.findById}")
+    private String findByIdSql;
 
-    private static final String SQL_UPDATE_DEPARTMENT =
-            "UPDATE DEPARTMENT SET DEPARTMENT_NAME = :DEPARTMENT_NAME WHERE DEPARTMENT_ID = :DEPARTMENT_ID;";
+    @Value("${department.check}")
+    private String checkSql;
 
-    NamedParameterJdbcTemplate namedParameterJdbcTemplate;
+    private NamedParameterJdbcTemplate namedParameterJdbcTemplate;
 
-    RowMapper rowMapper = BeanPropertyRowMapper.newInstance(Department.class);
+    private RowMapper rowMapper = BeanPropertyRowMapper.newInstance(Department.class);
 
     public DepartmentDaoJdbc(NamedParameterJdbcTemplate namedParameterJdbcTemplate) {
         this.namedParameterJdbcTemplate = namedParameterJdbcTemplate;
@@ -46,14 +47,14 @@ public class DepartmentDaoJdbc implements DepartmentDao {
     @Override
     public List<Department> findAll() {
         LOGGER.debug("Find all departments");
-        return namedParameterJdbcTemplate.query(SQL_GET_ALL_DEPARTMENTS, rowMapper);
+        return namedParameterJdbcTemplate.query(selectSql, rowMapper);
     }
 
     @Override
     public Optional<Department> findById(Integer departmentId) {
         LOGGER.debug("Find department by id: {}", departmentId);
         SqlParameterSource sqlParameterSource = new MapSqlParameterSource("DEPARTMENT_ID", departmentId);
-        return Optional.ofNullable((Department) namedParameterJdbcTemplate.queryForObject(SQL_GET_DEPARTMENT_BY_ID, sqlParameterSource, rowMapper));
+        return Optional.ofNullable((Department) namedParameterJdbcTemplate.queryForObject(findByIdSql, sqlParameterSource, rowMapper));
     }
 
     @Override
@@ -66,7 +67,7 @@ public class DepartmentDaoJdbc implements DepartmentDao {
         }
         KeyHolder keyHolder = new GeneratedKeyHolder();
         SqlParameterSource sqlParameterSource = new MapSqlParameterSource("DEPARTMENT_NAME", department.getDepartmentName());
-        namedParameterJdbcTemplate.update(SQL_CREATE_DEPARTMENT, sqlParameterSource, keyHolder);
+        namedParameterJdbcTemplate.update(createSql, sqlParameterSource, keyHolder);
         Integer departmentId = Objects.requireNonNull(keyHolder.getKey()).intValue();
         department.setDepartmentId(departmentId);
         long stopTime = System.nanoTime();
@@ -75,7 +76,7 @@ public class DepartmentDaoJdbc implements DepartmentDao {
     }
 
     private boolean isDepartmentNameUnique(Department department) {
-        return namedParameterJdbcTemplate.queryForObject(SQL_CHECK_DEPARTMENT_NAME,
+        return namedParameterJdbcTemplate.queryForObject(checkSql,
                 new MapSqlParameterSource("DEPARTMENT_NAME", department.getDepartmentName()), Integer.class) == 0;
     }
 
@@ -85,7 +86,7 @@ public class DepartmentDaoJdbc implements DepartmentDao {
         SqlParameterSource sqlParameterSource =
                 new MapSqlParameterSource("DEPARTMENT_NAME", department.getDepartmentName())
                         .addValue("DEPARTMENT_ID", department.getDepartmentId());
-        return namedParameterJdbcTemplate.update(SQL_UPDATE_DEPARTMENT, sqlParameterSource);
+        return namedParameterJdbcTemplate.update(updateSql, sqlParameterSource);
     }
 
     @Override
