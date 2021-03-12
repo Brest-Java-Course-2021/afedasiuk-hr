@@ -31,6 +31,7 @@
         </property>
     </bean>
 
+
     <bean id="namedParameterJdbcTemplate" class="org.springframework.jdbc.core.namedparam.NamedParameterJdbcTemplate">
         <constructor-arg ref="dataSource"/>
     </bean>
@@ -50,6 +51,7 @@
     <bean id="departmentDtoService" class="com.epam.brest.service.impl.DepartmentDtoServiceImpl">
         <constructor-arg name="departmentDtoDao" ref="departmentDtoDao"/>
     </bean>
+
 
     <!-- Thymeleaf Template Resolver -->
     <bean id="templateResolver"
