@@ -1,19 +1,18 @@
 package com.epam.brest.dao.jdbc;
 
 import com.epam.brest.model.Department;
-import org.junit.Assert;
-import org.junit.Test;
-import org.junit.runner.RunWith;
+import org.junit.jupiter.api.Assertions;
+import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.ArgumentCaptor;
 import org.mockito.ArgumentMatchers;
 import org.mockito.Captor;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.Mockito;
-import org.mockito.junit.MockitoJUnitRunner;
+import org.mockito.junit.jupiter.MockitoExtension;
 import org.springframework.jdbc.core.RowMapper;
 import org.springframework.jdbc.core.namedparam.NamedParameterJdbcTemplate;
-import org.springframework.jdbc.core.namedparam.SqlParameterSource;
 import org.springframework.test.util.ReflectionTestUtils;
 
 import java.util.Collections;
@@ -22,7 +21,7 @@ import java.util.List;
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.ArgumentMatchers.eq;
 
-@RunWith(MockitoJUnitRunner.class)
+@ExtendWith(MockitoExtension.class)
 public class DepartmentDaoJdbcMockTest {
 
     @InjectMocks
@@ -47,14 +46,14 @@ public class DepartmentDaoJdbcMockTest {
 
         List<Department> result = departmentDao.findAll();
 
-        Assert.assertNotNull(result);
-        Assert.assertFalse(result.isEmpty());
-        Assert.assertSame(result.get(0), department);
+        Assertions.assertNotNull(result);
+        Assertions.assertFalse(result.isEmpty());
+        Assertions.assertSame(result.get(0), department);
 
         Mockito.verify(namedParameterJdbcTemplate).query(eq(sql), captor.capture());
 
         RowMapper<Department> mapper = captor.getValue();
-        Assert.assertNotNull(mapper);
+        Assertions.assertNotNull(mapper);
 
         Mockito.verifyNoMoreInteractions(namedParameterJdbcTemplate);
     }
@@ -62,10 +61,10 @@ public class DepartmentDaoJdbcMockTest {
     @Test
     public void createTest() {
 
-        Department department = new Department();
-
-        Mockito.when(namedParameterJdbcTemplate.queryForObject(any(), any(SqlParameterSource.class), eq(Integer.class)))
-                .thenReturn(0);
+//        Department department = new Department();
+//
+//        Mockito.when(namedParameterJdbcTemplate.queryForObject(any(), any(SqlParameterSource.class), eq(Integer.class)))
+//                .thenReturn(0);
 
         //departmentDao.create(department);
     }

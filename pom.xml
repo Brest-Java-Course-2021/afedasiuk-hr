@@ -29,6 +29,7 @@
         <spring.version>5.3.4</spring.version>
         <logback.version>1.2.3</logback.version>
         <mockito.version>3.8.0</mockito.version>
+        <junit.version>5.7.1</junit.version>
     </properties>
 
     <dependencyManagement>
@@ -148,9 +149,16 @@
             </dependency>
 
             <dependency>
-                <groupId>junit</groupId>
-                <artifactId>junit</artifactId>
-                <version>4.12</version>
+                <groupId>org.junit.jupiter</groupId>
+                <artifactId>junit-jupiter-api</artifactId>
+                <version>${junit.version}</version>
+                <scope>test</scope>
+            </dependency>
+
+            <dependency>
+                <groupId>org.junit.jupiter</groupId>
+                <artifactId>junit-jupiter-engine</artifactId>
+                <version>${junit.version}</version>
                 <scope>test</scope>
             </dependency>
 
