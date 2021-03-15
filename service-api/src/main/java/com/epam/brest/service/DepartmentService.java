@@ -16,4 +16,6 @@ public interface DepartmentService {
     Integer update(Department department);
 
     Integer delete(Integer departmentId);
+
+    Integer count();
 }

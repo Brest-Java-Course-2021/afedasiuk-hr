@@ -5,6 +5,7 @@ import com.epam.brest.dao.*;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.dao.support.DataAccessUtils;
 import org.springframework.jdbc.core.BeanPropertyRowMapper;
 import org.springframework.jdbc.core.RowMapper;
 import org.springframework.jdbc.core.namedparam.MapSqlParameterSource;
@@ -13,6 +14,7 @@ import org.springframework.jdbc.core.namedparam.SqlParameterSource;
 import org.springframework.jdbc.support.GeneratedKeyHolder;
 import org.springframework.jdbc.support.KeyHolder;
 
+import java.util.HashMap;
 import java.util.List;
 import java.util.Objects;
 import java.util.Optional;
@@ -36,6 +38,12 @@ public class DepartmentDaoJdbc implements DepartmentDao {
     @Value("${department.check}")
     private String checkSql;
 
+    @Value("${department.count}")
+    private String countSql;
+
+    @Value("${department.delete}")
+    private String deleteSql;
+
     private NamedParameterJdbcTemplate namedParameterJdbcTemplate;
 
     private RowMapper rowMapper = BeanPropertyRowMapper.newInstance(Department.class);
@@ -54,7 +62,9 @@ public class DepartmentDaoJdbc implements DepartmentDao {
     public Optional<Department> findById(Integer departmentId) {
         LOGGER.debug("Find department by id: {}", departmentId);
         SqlParameterSource sqlParameterSource = new MapSqlParameterSource("DEPARTMENT_ID", departmentId);
-        return Optional.ofNullable((Department) namedParameterJdbcTemplate.queryForObject(findByIdSql, sqlParameterSource, rowMapper));
+        // Note: don't use queryForObject to reduce exception handling
+        List<Department> results = namedParameterJdbcTemplate.query(findByIdSql, sqlParameterSource, rowMapper);
+        return Optional.ofNullable(DataAccessUtils.uniqueResult(results));
     }
 
     @Override
@@ -92,6 +102,13 @@ public class DepartmentDaoJdbc implements DepartmentDao {
     @Override
     public Integer delete(Integer departmentId) {
         LOGGER.debug("Delete department by id: {}", departmentId);
-        return null;
+        return namedParameterJdbcTemplate.update(deleteSql, new MapSqlParameterSource()
+                .addValue("DEPARTMENT_ID", departmentId));
+    }
+
+    @Override
+    public Integer count() {
+        LOGGER.debug("count()");
+        return namedParameterJdbcTemplate.queryForObject(countSql, new HashMap<>(), Integer.class);
     }
 }
