@@ -24,7 +24,6 @@ public class DepartmentDtoDaoJdbc implements DepartmentDtoDao {
     @Value("${departmentDto.findAllWithAvgSalary}")
     private String findAllWithAvgSalarySql;
 
-
     public DepartmentDtoDaoJdbc(NamedParameterJdbcTemplate namedParameterJdbcTemplate) {
         this.namedParameterJdbcTemplate = namedParameterJdbcTemplate;
     }
