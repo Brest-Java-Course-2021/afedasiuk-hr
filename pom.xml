@@ -10,25 +10,19 @@
         This pom is a maven aggregator that contains all application modules.
     </description>
 
-    <parent>
-        <groupId>org.springframework.boot</groupId>
-        <artifactId>spring-boot-starter-parent</artifactId>
-        <version>2.4.2</version>
-    </parent>
-
     <groupId>com.epam.brest</groupId>
     <artifactId>hr</artifactId>
     <version>1.0-SNAPSHOT</version>
 
     <modules>
+        <module>web-app</module>
+        <module>rest-app</module>
         <module>model</module>
         <module>test-db</module>
         <module>dao-api</module>
         <module>dao</module>
         <module>service-api</module>
         <module>service</module>
-        <module>web-app</module>
-        <module>rest-app</module>
     </modules>
 
     <properties>
@@ -50,13 +44,21 @@
     <dependencyManagement>
         <dependencies>
 
-<!--            <dependency>-->
-<!--                <groupId>org.springframework</groupId>-->
-<!--                <artifactId>spring-framework-bom</artifactId>-->
-<!--                <version>5.3.5</version>-->
-<!--                <type>pom</type>-->
-<!--                <scope>import</scope>-->
-<!--            </dependency>-->
+            <dependency>
+                <groupId>org.springframework</groupId>
+                <artifactId>spring-framework-bom</artifactId>
+                <version>5.3.5</version>
+                <type>pom</type>
+                <scope>import</scope>
+            </dependency>
+
+            <dependency>
+                <groupId>org.springframework.boot</groupId>
+                <artifactId>spring-boot-dependencies</artifactId>
+                <type>pom</type>
+                <version>2.4.4</version>
+                <scope>import</scope>
+            </dependency>
 
             <dependency>
                 <groupId>com.epam.brest</groupId>
@@ -95,76 +97,22 @@
             </dependency>
 
 <!--            <dependency>-->
-<!--                <groupId>org.springframework</groupId>-->
-<!--                <artifactId>spring-context</artifactId>-->
-<!--                <version>${spring.version}</version>-->
+<!--                <groupId>org.springframework.boot</groupId>-->
+<!--                <artifactId>spring-boot-starter-web</artifactId>-->
+<!--                <version>2.4.4</version>-->
 <!--            </dependency>-->
 
 <!--            <dependency>-->
-<!--                <groupId>org.springframework</groupId>-->
-<!--                <artifactId>spring-beans</artifactId>-->
-<!--                <version>${spring.version}</version>-->
+<!--                <groupId>org.springframework.boot</groupId>-->
+<!--                <artifactId>spring-boot-starter-thymeleaf</artifactId>-->
+<!--                <version>2.4.2</version>-->
 <!--            </dependency>-->
 
 <!--            <dependency>-->
-<!--                <groupId>org.springframework</groupId>-->
-<!--                <artifactId>spring-jdbc</artifactId>-->
-<!--                <version>${spring.version}</version>-->
+<!--                <groupId>org.springframework.boot</groupId>-->
+<!--                <artifactId>spring-boot-starter-tomcat</artifactId>-->
+<!--                <version>2.4.2</version>-->
 <!--            </dependency>-->
-
-<!--            <dependency>-->
-<!--                <groupId>org.springframework</groupId>-->
-<!--                <artifactId>spring-tx</artifactId>-->
-<!--                <version>${spring.version}</version>-->
-<!--            </dependency>-->
-
-<!--            <dependency>-->
-<!--                <groupId>org.springframework</groupId>-->
-<!--                <artifactId>spring-web</artifactId>-->
-<!--                <version>${spring.version}</version>-->
-<!--            </dependency>-->
-
-<!--            <dependency>-->
-<!--                <groupId>org.springframework</groupId>-->
-<!--                <artifactId>spring-webmvc</artifactId>-->
-<!--                <version>${spring.version}</version>-->
-<!--            </dependency>-->
-
-<!--            <dependency>-->
-<!--                <groupId>org.springframework</groupId>-->
-<!--                <artifactId>spring-tx</artifactId>-->
-<!--                <version>${spring.version}</version>-->
-<!--            </dependency>-->
-
-<!--            <dependency>-->
-<!--                <groupId>org.springframework</groupId>-->
-<!--                <artifactId>spring-web</artifactId>-->
-<!--                <version>${spring.version}</version>-->
-<!--            </dependency>-->
-
-<!--            <dependency>-->
-<!--                <groupId>org.springframework</groupId>-->
-<!--                <artifactId>spring-webmvc</artifactId>-->
-<!--                <version>${spring.version}</version>-->
-<!--            </dependency>-->
-
-            <dependency>
-                <groupId>org.springframework.boot</groupId>
-                <artifactId>spring-boot-starter-web</artifactId>
-                <version>2.4.4</version>
-            </dependency>
-
-            <dependency>
-                <groupId>org.springframework.boot</groupId>
-                <artifactId>spring-boot-starter-thymeleaf</artifactId>
-                <version>2.4.2</version>
-            </dependency>
-
-            <dependency>
-                <groupId>org.springframework.boot</groupId>
-                <artifactId>spring-boot-starter-tomcat</artifactId>
-                <version>2.4.2</version>
-            </dependency>
 
             <dependency>
                 <groupId>org.thymeleaf</groupId>
@@ -199,19 +147,6 @@
                 <artifactId>h2</artifactId>
                 <version>1.4.200</version>
             </dependency>
-
-            <dependency>
-                <groupId>com.fasterxml.jackson.core</groupId>
-                <artifactId>jackson-databind</artifactId>
-                <version>2.12.2</version>
-            </dependency>
-
-<!--            <dependency>-->
-<!--                <groupId>org.springframework</groupId>-->
-<!--                <artifactId>spring-test</artifactId>-->
-<!--                <version>${spring.version}</version>-->
-<!--                <scope>test</scope>-->
-<!--            </dependency>-->
 
             <dependency>
                 <groupId>org.apache.commons</groupId>

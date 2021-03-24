@@ -2,6 +2,7 @@ package com.epam.brest.dao.jdbc;
 
 import com.epam.brest.model.Department;
 import org.junit.jupiter.api.Assertions;
+import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.ArgumentCaptor;
@@ -22,6 +23,7 @@ import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.ArgumentMatchers.eq;
 
 @ExtendWith(MockitoExtension.class)
+@Disabled
 public class DepartmentDaoJdbcMockTest {
 
     @InjectMocks
