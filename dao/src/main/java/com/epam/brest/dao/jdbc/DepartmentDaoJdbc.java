@@ -21,6 +21,9 @@ import java.util.List;
 import java.util.Objects;
 import java.util.Optional;
 
+/**
+ *  Implementation of DepartmentDao interface.
+ */
 @Repository
 public class DepartmentDaoJdbc implements DepartmentDao {
 
@@ -55,6 +58,11 @@ public class DepartmentDaoJdbc implements DepartmentDao {
         this.namedParameterJdbcTemplate = new NamedParameterJdbcTemplate(dataSource);
     }
 
+    /**
+     * Returns all Departments.
+     *
+     * @return list of Departments objects.
+     */
     @Override
     public List<Department> findAll() {
         LOGGER.debug("Find all departments");
