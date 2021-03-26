@@ -42,7 +42,7 @@ public class DepartmentController {
     public ResponseEntity<Integer> createDepartment(@RequestBody Department department) {
         LOGGER.debug("createDepartment({})", department);
         Integer id = departmentService.create(department);
-        return new ResponseEntity<>(id, HttpStatus.OK);
+        return new ResponseEntity<>(id, HttpStatus.CREATED);
     }
 
     @PutMapping(value = "/departments", consumes = {"application/json"}, produces = {"application/json"})
