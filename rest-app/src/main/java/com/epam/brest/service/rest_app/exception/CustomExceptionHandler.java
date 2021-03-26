@@ -14,4 +14,9 @@ public class CustomExceptionHandler extends ResponseEntityExceptionHandler {
         ErrorResponse error = new ErrorResponse(e.getMessage());
         return new ResponseEntity<>(error, HttpStatus.NOT_FOUND);
     }
+
+    @ExceptionHandler(value = {IllegalArgumentException.class})
+    public ResponseEntity<ErrorResponse> handleIllegalArgumentException() {
+        return new ResponseEntity<>(new ErrorResponse("validation_error"), HttpStatus.UNPROCESSABLE_ENTITY);
+    }
 }
