@@ -21,19 +21,11 @@
         </dependency>
         <dependency>
             <groupId>com.epam.brest</groupId>
-            <artifactId>dao-api</artifactId>
-        </dependency>
-        <dependency>
-            <groupId>com.epam.brest</groupId>
-            <artifactId>dao</artifactId>
-        </dependency>
-        <dependency>
-            <groupId>com.epam.brest</groupId>
             <artifactId>service-api</artifactId>
         </dependency>
         <dependency>
             <groupId>com.epam.brest</groupId>
-            <artifactId>service</artifactId>
+            <artifactId>service-rest</artifactId>
         </dependency>
 
         <dependency>
@@ -71,10 +63,10 @@
         </dependency>
 
         <!--tests-->
-        <dependency>
-            <groupId>com.epam.brest</groupId>
-            <artifactId>test-db</artifactId>
-        </dependency>
+<!--        <dependency>-->
+<!--            <groupId>com.epam.brest</groupId>-->
+<!--            <artifactId>test-db</artifactId>-->
+<!--        </dependency>-->
 
         <dependency>
             <groupId>org.apache.commons</groupId>
@@ -102,10 +94,10 @@
             <artifactId>junit-jupiter-engine</artifactId>
         </dependency>
 
-        <dependency>
-            <groupId>com.h2database</groupId>
-            <artifactId>h2</artifactId>
-        </dependency>
+<!--        <dependency>-->
+<!--            <groupId>com.h2database</groupId>-->
+<!--            <artifactId>h2</artifactId>-->
+<!--        </dependency>-->
 
         <dependency>
             <groupId>org.springframework.boot</groupId>
@@ -121,11 +113,6 @@
 
     <build>
         <plugins>
-            <!-- Embedded Jetty HTTP Server for testing web application -->
-            <plugin>
-                <groupId>org.eclipse.jetty</groupId>
-                <artifactId>jetty-maven-plugin</artifactId>
-            </plugin>
             <plugin>
                 <groupId>org.springframework.boot</groupId>
                 <artifactId>spring-boot-maven-plugin</artifactId>
