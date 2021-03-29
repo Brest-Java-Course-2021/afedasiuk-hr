@@ -3,6 +3,7 @@ package com.epam.brest.service.rest_app;
 import com.epam.brest.model.Department;
 import com.epam.brest.service.DepartmentService;
 import com.epam.brest.service.rest_app.exception.DepartmentNotFoundException;
+import com.epam.brest.service.rest_app.exception.ErrorResponse;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.http.HttpStatus;
@@ -16,6 +17,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
 import java.util.Collection;
+import java.util.Optional;
 
 @RestController
 public class DepartmentController {
@@ -34,8 +36,13 @@ public class DepartmentController {
     }
 
     @GetMapping(value = "/departments/{id}")
-    public Department findById(@PathVariable Integer id) {
-        return departmentService.findById(id).orElseThrow(() -> new DepartmentNotFoundException(id));
+    public ResponseEntity<Department> findById(@PathVariable Integer id) {
+        LOGGER.debug("findById({})", id);
+        //return departmentService.findById(id).orElseThrow(() -> new DepartmentNotFoundException(id));
+        Optional<Department> optional = departmentService.findById(id);
+        return optional.isPresent()
+                ? new ResponseEntity<>(optional.get(), HttpStatus.OK)
+                : new ResponseEntity<>(HttpStatus.NOT_FOUND);
     }
 
     @PostMapping(value = "/departments", consumes = {"application/json"}, produces = {"application/json"})
@@ -56,7 +63,16 @@ public class DepartmentController {
     public ResponseEntity<Integer> deleteDepartment(@PathVariable Integer id) {
         LOGGER.debug("deleteDepartment({})", id);
         Integer result = departmentService.delete(id);
-        return new ResponseEntity<>(result, HttpStatus.OK);
+//        return new ResponseEntity<>(result, HttpStatus.OK);
+        return result > 0
+                ? new ResponseEntity<>(result, HttpStatus.OK)
+                : new ResponseEntity<>(HttpStatus.NOT_FOUND);
+
+    }
+
+    @GetMapping(value = "/departments/count")
+    public ResponseEntity<Integer> count() {
+        return new ResponseEntity<>(departmentService.count(), HttpStatus.OK);
     }
 
 }
