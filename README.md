@@ -99,7 +99,7 @@ curl --request DELETE 'http://localhost:8088/departments/4'
 You can use Docker.
 A number of docker-compose configuration are available in the [./docker](./docker) folder to launch required third party services.
 
-sadfgsdaf
+
 ### Postgresql
 
 For example, to start a postgresql database in a docker container, run:
