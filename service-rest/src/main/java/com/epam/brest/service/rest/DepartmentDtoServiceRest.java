@@ -4,11 +4,13 @@ import com.epam.brest.model.dto.DepartmentDto;
 import com.epam.brest.service.DepartmentDtoService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.springframework.http.ResponseEntity;
+import org.springframework.core.ParameterizedTypeReference;
 import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestTemplate;
 
 import java.util.List;
+
+import static org.springframework.http.HttpMethod.GET;
 
 @Service
 public class DepartmentDtoServiceRest implements DepartmentDtoService {
@@ -28,7 +30,6 @@ public class DepartmentDtoServiceRest implements DepartmentDtoService {
     public List<DepartmentDto> findAllWithAvgSalary() {
 
         LOGGER.debug("findAllWithAvgSalary()");
-        ResponseEntity responseEntity = restTemplate.getForEntity(url, List.class);
-        return (List<DepartmentDto>) responseEntity.getBody();
+        return restTemplate.exchange(url, GET, null, new ParameterizedTypeReference<List<DepartmentDto>>() {}).getBody();
     }
 }
