@@ -8,6 +8,8 @@ import {DepartmentsModule} from './departments/departments.module';
 import {EmployeesModule} from './employees/employees.module';
 import {PageNotFoundComponent} from './components/page-not-found/page-not-found.component';
 import {NavigationComponent} from './components/navigation/navigation.component';
+import {DepartmentService} from "./services/department.service";
+import {HttpClientModule} from "@angular/common/http";
 
 @NgModule({
   declarations: [
@@ -19,10 +21,13 @@ import {NavigationComponent} from './components/navigation/navigation.component'
     BrowserModule,
     AppRoutingModule,
     NgbModule,
+    HttpClientModule,
     DepartmentsModule,
     EmployeesModule
   ],
-  providers: [],
+  providers: [
+    DepartmentService
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

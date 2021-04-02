@@ -11,7 +11,7 @@ import org.springframework.web.bind.annotation.*;
 import java.util.Collection;
 import java.util.Optional;
 
-//@CrossOrigin
+@CrossOrigin
 @RestController
 public class DepartmentController {
 
