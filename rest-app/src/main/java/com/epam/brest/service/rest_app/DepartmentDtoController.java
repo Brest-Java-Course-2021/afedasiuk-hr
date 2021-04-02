@@ -9,6 +9,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import java.util.Collection;
 
+//@CrossOrigin
 @RestController
 public class DepartmentDtoController {
 
