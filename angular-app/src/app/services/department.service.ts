@@ -4,13 +4,14 @@ import {Observable} from "rxjs";
 import {DepartmentDto} from "../model/department-dto";
 import {catchError, map, tap} from 'rxjs/operators';
 import {Department} from "../model/department";
+import {environment} from "../../environments/environment";
 
 @Injectable({
   providedIn: 'root'
 })
 export class DepartmentService {
 
-  private basePath = 'http://localhost:8088';
+  private basePath = environment.basePath;
 
   constructor(protected httpClient: HttpClient) {
   }

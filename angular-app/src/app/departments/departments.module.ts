@@ -7,13 +7,12 @@ import {DepartmentFormComponent} from './components/department-form/department-f
 import {DepartmentsComponent} from './departments.component';
 import {FormsModule} from "@angular/forms";
 
-
 @NgModule({
   declarations: [DepartmentListComponent, DepartmentFormComponent, DepartmentsComponent],
   imports: [
     CommonModule,
-    DepartmentsRoutingModule,
-    FormsModule
+    FormsModule,
+    DepartmentsRoutingModule
   ]
 })
 export class DepartmentsModule { }

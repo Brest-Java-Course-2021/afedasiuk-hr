@@ -9,7 +9,6 @@ import {switchMap} from 'rxjs/operators';
   styleUrls: ['./department-form.component.scss']
 })
 export class DepartmentFormComponent implements OnInit {
-
   department: Department;
 
   constructor(
@@ -55,4 +54,5 @@ export class DepartmentFormComponent implements OnInit {
   onGoBack(): void {
     this.router.navigate(['/departments']);
   }
+
 }

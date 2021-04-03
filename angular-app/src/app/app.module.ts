@@ -10,6 +10,7 @@ import {PageNotFoundComponent} from './components/page-not-found/page-not-found.
 import {NavigationComponent} from './components/navigation/navigation.component';
 import {DepartmentService} from "./services/department.service";
 import {HttpClientModule} from "@angular/common/http";
+import {FormsModule} from "@angular/forms";
 
 @NgModule({
   declarations: [
@@ -21,6 +22,7 @@ import {HttpClientModule} from "@angular/common/http";
     BrowserModule,
     AppRoutingModule,
     NgbModule,
+    FormsModule,
     HttpClientModule,
     DepartmentsModule,
     EmployeesModule
