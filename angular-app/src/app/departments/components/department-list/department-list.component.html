@@ -4,8 +4,7 @@
     <span class="navbar-brand text-uppercase mr-auto">Departments</span>
     <ul class="navbar-nav float-right">
       <li class="nav-item">
-        <a href="#"
-           class="btn btn-light"
+        <a class="btn btn-light"
            ngbTooltip="Add department"
            placement="bottom" (click)="onAdd()">
           <i class="bi-plus"></i> <span
@@ -33,15 +32,14 @@
               <td>{{departmentDto.departmentName}}</td>
               <td>{{departmentDto.avgSalary}}</td>
               <td class="text-right">
-                <a href="#"
-                   class="btn-sm btn-outline-secondary"
+                <a class="btn-sm btn-outline-secondary"
                    ngbTooltip="Edit department"
                    placement="top"
                    (click)="onEdit(departmentDto)">
                   <i class="bi-pen"></i> <span
                   class="d-none d-md-inline">Edit</span></a>
                 <span data-toggle="modal" data-target="#deleteDialog">
-                            	<a href="#" class="btn-sm btn-outline-secondary"
+                            	<a class="btn-sm btn-outline-secondary"
                                  ngbTooltip="delete department"
                                  placement="top">
                                 <i class="bi-x"></i> <span class="d-none d-md-inline">Delete</span></a>
